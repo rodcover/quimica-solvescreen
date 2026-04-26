@@ -1,0 +1,27 @@
+# Smoke test após push (ETL + treino no fixture; não usa MNSOL licenciado)
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: ETL (fixture)
+        run: python scripts/run_etl.py data/fixtures/sample_mnsol_like.tsv -o data/processed/ci_clean.parquet
+
+      - name: Train baseline (fixture)
+        run: python scripts/run_train.py data/processed/ci_clean.parquet -o models/ci_baseline.joblib --metrics models/ci_metrics.json

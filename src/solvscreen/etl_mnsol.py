@@ -208,6 +208,8 @@ def merge_smiles_table(df: pd.DataFrame, smiles_path: Path | str, on: str = "ent
 
 def to_standard_parquet(df: pd.DataFrame, out_path: Path | str) -> None:
     """Write cleaned table with stable column order (missing cols filled with NA)."""
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     out = pd.DataFrame()
     for c in OUT_COLS:
         out[c] = df[c] if c in df.columns else np.nan
