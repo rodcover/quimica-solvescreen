@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/solvscreen/confinement_dataset.schema.json",
+  "title": "SolvScreenConfinementSample",
+  "type": "object",
+  "required": ["sample_id", "source_type", "inputs", "labels"],
+  "properties": {
+    "sample_id": {
+      "type": "string",
+      "description": "Stable identifier (e.g. UUID or MD run key)."
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["simulation", "literature_extraction", "hybrid"],
+      "description": "simulation: own MD/ML-MD; literature_extraction: values from published figures/tables; hybrid: mixed."
+    },
+    "citation": {
+      "type": "string",
+      "description": "DOI or primary reference when source_type is literature_extraction or hybrid."
+    },
+    "inputs": {
+      "type": "object",
+      "required": ["confinement_type", "effective_width_nm", "ion", "temperature_k"],
+      "properties": {
+        "confinement_type": {
+          "type": "string",
+          "enum": ["graphene_slit", "cnt_pore", "go_lamellar", "other"]
+        },
+        "effective_width_nm": { "type": "number", "exclusiveMinimum": 0 },
+        "surface_charge_density_cm2": { "type": ["number", "null"] },
+        "oxygen_functional_group_density": { "type": ["number", "null"], "description": "Optional descriptor for GO-like walls." },
+        "ion": { "type": "string", "description": "e.g. Li+, Mg2+, Ca2+, Cl-" },
+        "ionic_strength_molar": { "type": ["number", "null"] },
+        "temperature_k": { "type": "number", "exclusiveMinimum": 0 },
+        "water_model_or_ff": { "type": ["string", "null"] },
+        "notes": { "type": ["string", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "md_observables_optional": {
+      "type": "object",
+      "description": "Low-cost summaries from trajectories; can be inputs to surrogate models.",
+      "properties": {
+        "rdf_ion_o_peak1_r_angstrom": { "type": ["number", "null"] },
+        "rdf_ion_o_peak1_gmax": { "type": ["number", "null"] },
+        "mean_coordination_number_shell1": { "type": ["number", "null"] },
+        "water_orientation_order_parameter": { "type": ["number", "null"] }
+      },
+      "additionalProperties": true
+    },
+    "labels": {
+      "type": "object",
+      "description": "Regression/classification targets derived from PMF, barriers, or experiment.",
+      "properties": {
+        "pmf_barrier_kcal_mol": { "type": ["number", "null"] },
+        "delta_g_insertion_kcal_mol": { "type": ["number", "null"] },
+        "delta_g_pore_minus_bulk_kcal_mol": { "type": ["number", "null"] },
+        "permeation_rate_relative": { "type": ["number", "null"] },
+        "selectivity_ratio": { "type": ["number", "null"], "description": "e.g. j_A / j_B for two ions." }
+      },
+      "additionalProperties": true
+    },
+    "uncertainty": {
+      "type": "object",
+      "properties": {
+        "pmf_barrier_kcal_mol_std": { "type": ["number", "null"] },
+        "method": { "type": ["string", "null"], "description": "e.g. block_average, bootstrap" }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

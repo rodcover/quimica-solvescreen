@@ -1,0 +1,6 @@
+entry	solute_name	formula	charge	solvent	delta_g_kcal_mol	type	epsilon	n	alpha	beta	gamma	phi2	psi2	beta2	smiles
+1	methane	CH4	0	water	2.00	abs	78.39	1.333	0.0	0.0	0.0	0.0	0.0	0.0	C
+2	ethane	C2H6	0	water	1.83	abs	78.39	1.333	0.0	0.0	0.0	0.0	0.0	0.0	CC
+3	ethanol	C2H6O	0	water	-5.00	abs	78.39	1.333	0.0	0.0	0.0	0.0	0.0	0.0	CCO
+4	ethanol	C2H6O	0	hexane	-1.20	abs	1.88	1.375	0.0	0.0	0.0	0.0	0.0	0.0	CCO
+5	benzene	C6H6	0	water	-0.90	abs	78.39	1.333	0.0	0.0	0.0	0.0	0.0	0.0	c1ccccc1

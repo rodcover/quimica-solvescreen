@@ -1,0 +1,12 @@
+# SolvScreen — bulk solvation + confinement API
+# MNSOL must be obtained under UMN license; do not redistribute raw files.
+pandas>=2.0.0
+pyarrow>=14.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.5.0
+rdkit>=2023.9.1
+joblib>=1.3.0
+python-multipart>=0.0.6

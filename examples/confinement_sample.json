@@ -1,0 +1,33 @@
+{
+  "sample_id": "demo-001",
+  "source_type": "simulation",
+  "citation": null,
+  "inputs": {
+    "confinement_type": "graphene_slit",
+    "effective_width_nm": 0.8,
+    "surface_charge_density_cm2": null,
+    "oxygen_functional_group_density": null,
+    "ion": "Li+",
+    "ionic_strength_molar": 0.1,
+    "temperature_k": 298.15,
+    "water_model_or_ff": "TIP4P/2005",
+    "notes": "Illustrative record for schema validation."
+  },
+  "md_observables_optional": {
+    "rdf_ion_o_peak1_r_angstrom": 2.1,
+    "rdf_ion_o_peak1_gmax": 4.5,
+    "mean_coordination_number_shell1": 5.2,
+    "water_orientation_order_parameter": null
+  },
+  "labels": {
+    "pmf_barrier_kcal_mol": 3.2,
+    "delta_g_insertion_kcal_mol": null,
+    "delta_g_pore_minus_bulk_kcal_mol": 1.1,
+    "permeation_rate_relative": null,
+    "selectivity_ratio": null
+  },
+  "uncertainty": {
+    "pmf_barrier_kcal_mol_std": 0.4,
+    "method": "block_average"
+  }
+}

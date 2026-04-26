@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Licensed raw data — never commit MNSOL bundle
+data/raw/*
+!data/raw/.gitkeep
+
+# Generated artifacts (reproduce with scripts)
+data/processed/*.parquet
+models/*.joblib
+models/*.json
+!models/.gitkeep
+
+.ipynb_checkpoints/
+
+# PDFs locais em fontes (use links DOI/arXiv no README; evita copyright/LFS)
+fontes/*.pdf
