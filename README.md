@@ -1,5 +1,7 @@
 # SolvScreen (implementação do plano)
 
+**Tutorial fim a fim** (implementação, execução, exemplos, literatura): [docs/TUTORIAL.md](docs/TUTORIAL.md).
+
 Pipeline para **energia livre de solvatação em meio bulk** (estilo MNSOL / [Delfos](https://doi.org/10.1039/C9SC02452B)) e **esboço de API** para confinamento (sem modelo treinado até haver labels de MD/literatura).
 
 ## Dados e citações
