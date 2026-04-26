@@ -16,7 +16,28 @@ python scripts/run_etl.py path/to/MNSol_export.tsv -o data/processed/mnsol_clean
 python scripts/run_train.py data/processed/mnsol_clean.parquet -o models/baseline.joblib --metrics models/metrics.json
 ```
 
+Treino com **ensemble** (dispersão entre membros como incerteza heurística):
+
+```text
+python scripts/run_train.py data/processed/mnsol_clean.parquet -o models/baseline_ens.joblib --ensemble 5 --metrics models/metrics.json
+```
+
 Se o arquivo oficial não tiver SMILES, gere uma tabela auxiliar `entry_id,smiles` e use `--smiles-merge`.
+
+### Interface Streamlit
+
+```text
+set PYTHONPATH=src
+streamlit run streamlit_app/app.py
+```
+
+Ou: `python scripts/run_streamlit.py`. Modo **API** exige `uvicorn` rodando em paralelo.
+
+### Testes
+
+```text
+pytest tests/ -q
+```
 
 ### API
 
@@ -31,7 +52,7 @@ uvicorn api.main:app --reload
 
 ### Docker
 
-Coloque `baseline.joblib` em `models/` após treinar (ou ajuste o `Dockerfile`). `docker build` copia `models/` para a imagem.
+O `Dockerfile` gera um modelo de demonstração a partir do **fixture** durante o build e sobe só a API (`uvicorn`). Streamlit não entra na imagem padrão.
 
 ## Layout
 
@@ -40,7 +61,10 @@ Coloque `baseline.joblib` em `models/` após treinar (ou ajuste o `Dockerfile`).
 | `src/solvscreen/etl_mnsol.py` | ETL → Parquet |
 | `src/solvscreen/split_utils.py` | Split por cluster (Morgan) |
 | `src/solvscreen/features.py` | Fingerprints + vetor de solvente |
-| `src/solvscreen/train_baseline.py` | MLP + MAE/RMSE |
+| `src/solvscreen/train_baseline.py` | MLP + MAE/RMSE; opção `--ensemble` |
+| `src/solvscreen/model_bundle.py` | Predição única ou ensemble |
+| `streamlit_app/app.py` | Painel laboratório |
+| `tests/` | Pytest (ETL, features, modelo, API) |
 | `api/main.py` | FastAPI |
 | `schemas/confinement_dataset.schema.json` | Registro de amostras confinamento |
 | `notebooks/01_baseline_mnsol.ipynb` | Fluxo ETL + treino |

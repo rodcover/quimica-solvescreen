@@ -18,13 +18,13 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 try:
-    from solvscreen.inference import vector_for_prediction
+    from solvscreen.model_bundle import predict_bulk as predict_bulk_model
 except ImportError:
     import sys
 
     ROOT = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(ROOT / "src"))
-    from solvscreen.inference import vector_for_prediction
+    from solvscreen.model_bundle import predict_bulk as predict_bulk_model
 
 app = FastAPI(
     title="SolvScreen",
@@ -93,9 +93,9 @@ def health() -> dict[str, str]:
 @app.post("/predict/bulk", response_model=BulkPredictResponse)
 def predict_bulk(req: BulkPredictRequest) -> BulkPredictResponse:
     bundle = get_bundle()
-    model = bundle["model"]
     try:
-        x = vector_for_prediction(
+        y, unc = predict_bulk_model(
+            bundle,
             req.solute_smiles,
             epsilon=req.epsilon,
             n_refractive=req.n_refractive,
@@ -105,13 +105,17 @@ def predict_bulk(req: BulkPredictRequest) -> BulkPredictResponse:
             phi2=req.phi2,
             psi2=req.psi2,
             beta2=req.beta2,
-        ).reshape(1, -1)
+        )
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e)) from e
-    y = model.predict(x)[0]
+    note = bundle.get("feature")
+    if bundle.get("ensemble"):
+        nmem = bundle.get("n_members", len(bundle.get("models", [])))
+        note = f"{note};ensemble_n={nmem}"
     return BulkPredictResponse(
-        delta_g_kcal_mol=float(y),
-        model_note=bundle.get("feature"),
+        delta_g_kcal_mol=y,
+        uncertainty=unc,
+        model_note=note,
     )
 
 

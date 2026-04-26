@@ -33,8 +33,10 @@ def build_feature_matrix(df: pd.DataFrame, smiles_col: str = "smiles") -> tuple[
         else:
             solvent_vals.append(np.full(len(df), np.nan))
     S = np.column_stack(solvent_vals)
-    col_medians = np.nanmedian(S, axis=0)
-    col_medians = np.where(np.isfinite(col_medians), col_medians, 0.0)
+    col_medians = np.zeros(S.shape[1], dtype=np.float64)
+    for j in range(S.shape[1]):
+        col = S[:, j]
+        col_medians[j] = float(np.nanmedian(col)) if np.any(np.isfinite(col)) else 0.0
     inds = S.copy()
     for j in range(S.shape[1]):
         mask = np.isnan(inds[:, j])

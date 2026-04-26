@@ -25,3 +25,6 @@ jobs:
 
       - name: Train baseline (fixture)
         run: python scripts/run_train.py data/processed/ci_clean.parquet -o models/ci_baseline.joblib --metrics models/ci_metrics.json
+
+      - name: Pytest
+        run: pytest tests/ -q --tb=short
