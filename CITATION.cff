@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+title: SolvScreen
+message: "Se usar este software, cite usando os metadados abaixo."
+type: software
+authors:
+  - family-names: Contribuidores
+    name-particle: SolvScreen
+repository-code: "https://github.com/USER/REPO"
+url: "https://github.com/USER/REPO"
+license: MIT
+version: 0.2.0
+date-released: "2026-04-26"
+abstract: >-
+  Pipeline para estimativa de energia livre de solvatação em meio bulk (estilo MNSOL),
+  API FastAPI, interface Streamlit, e schema para dados de confinamento/nanoporos.

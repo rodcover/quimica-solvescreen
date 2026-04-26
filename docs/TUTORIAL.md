@@ -60,6 +60,38 @@ Os arquivos em **`fontes/`** no repositório são notas de apoio (incluindo link
 | `Dockerfile` | Imagem que treina no fixture no **build** e expõe só a API. |
 | `fontes/` | Notas e referências em Markdown (contexto do projeto). |
 | `notebooks/01_baseline_mnsol.ipynb` | Fluxo ETL + treino via subprocess. |
+| `configs/train_mlp.yaml` | Hiperparâmetros e tipo de modelo (`mlp` / `rf`) para `--config`. |
+| `Makefile` | Alvos `install`, `etl-fixture`, `train`, `test`, `api`, `ui`, `openapi`, `schema`. |
+| `docker-compose.yml` | Sobe API (porta 8000) e Streamlit (8501) com modelos demo. |
+| `scripts/benchmark_literature.py` | Compara `metrics.json` com faixas típicas do artigo Delfos. |
+| `scripts/export_openapi.py` | Gera `docs/openapi.json` a partir do FastAPI. |
+| `docs/DATA_POLICY.md` | Política de dados e licenças. |
+| `docs/REFERENCIAS.md` | Bibliografia expandida e BibTeX de exemplo. |
+| `CITATION.cff` | Metadados para citar o software. |
+
+### 3.1 Diagrama de fluxo (visão geral)
+
+```mermaid
+flowchart LR
+  subgraph entrada [Entrada]
+    MNSOL[MNSOL_licenciado]
+    Fix[Fixture_TSV]
+  end
+  ETL[ETL_Parquet]
+  Feat[Features_Morgan_mais_solvente]
+  Train[Treino_MLP_RF_Ensemble]
+  Artefato[Modelo_joblib]
+  API[FastAPI]
+  UI[Streamlit]
+  Nano[Schema_confinamento]
+  MNSOL --> ETL
+  Fix --> ETL
+  ETL --> Feat --> Train --> Artefato
+  Artefato --> API
+  Artefato --> UI
+  API --> UI
+  Nano -.->|futuro| Train
+```
 
 ---
 

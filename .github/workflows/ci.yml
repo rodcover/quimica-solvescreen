@@ -28,3 +28,9 @@ jobs:
 
       - name: Pytest
         run: pytest tests/ -q --tb=short
+
+      - name: Export OpenAPI
+        run: python scripts/export_openapi.py
+
+      - name: Benchmark vs literatura (ordem Delfos)
+        run: python scripts/benchmark_literature.py models/ci_metrics.json

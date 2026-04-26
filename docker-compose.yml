@@ -1,0 +1,21 @@
+# Uso: docker compose up --build
+# API: http://localhost:8000/docs  |  Streamlit: http://localhost:8501
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      SOLVSCREEN_MODEL_PATH: /app/models/baseline.joblib
+
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      SOLVSCREEN_MODEL_PATH: /app/models/baseline.joblib

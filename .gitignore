@@ -16,5 +16,8 @@ models/*.json
 
 .ipynb_checkpoints/
 
+# OpenAPI gerado localmente (opcional: versionar com cuidado)
+docs/openapi.json
+
 # PDFs locais em fontes (use links DOI/arXiv no README; evita copyright/LFS)
 fontes/*.pdf

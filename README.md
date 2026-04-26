@@ -1,6 +1,11 @@
 # SolvScreen (implementação do plano)
 
-**Tutorial fim a fim** (implementação, execução, exemplos, literatura): [docs/TUTORIAL.md](docs/TUTORIAL.md).
+[![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**Tutorial fim a fim:** [docs/TUTORIAL.md](docs/TUTORIAL.md) · **Dados / licenças:** [data/README.md](data/README.md) · **Contribuir:** [CONTRIBUTING.md](CONTRIBUTING.md) · **Changelog:** [CHANGELOG.md](CHANGELOG.md) · **Citar software:** [CITATION.cff](CITATION.cff)
+
+Substitua `USER/REPO` no badge de CI pelo seu GitHub (`usuario/repositorio`).
 
 Pipeline para **energia livre de solvatação em meio bulk** (estilo MNSOL / [Delfos](https://doi.org/10.1039/C9SC02452B)) e **esboço de API** para confinamento (sem modelo treinado até haver labels de MD/literatura).
 
@@ -22,6 +27,31 @@ Treino com **ensemble** (dispersão entre membros como incerteza heurística):
 
 ```text
 python scripts/run_train.py data/processed/mnsol_clean.parquet -o models/baseline_ens.joblib --ensemble 5 --metrics models/metrics.json
+```
+
+Baseline **Random Forest** (rápido para comparação):
+
+```text
+python scripts/run_train.py data/processed/mnsol_clean.parquet -o models/baseline_rf.joblib --model-type rf --metrics models/metrics_rf.json
+```
+
+Com arquivo de configuração:
+
+```text
+python scripts/run_train.py data/processed/mnsol_clean.parquet -o models/out.joblib --config configs/train_mlp.yaml --metrics models/metrics.json
+```
+
+Comparar métricas com ordem de grandeza **Delfos** (qualitativo):
+
+```text
+python scripts/benchmark_literature.py models/metrics.json
+```
+
+OpenAPI estático:
+
+```text
+set PYTHONPATH=src
+python scripts/export_openapi.py
 ```
 
 Se o arquivo oficial não tiver SMILES, gere uma tabela auxiliar `entry_id,smiles` e use `--smiles-merge`.
@@ -54,7 +84,20 @@ uvicorn api.main:app --reload
 
 ### Docker
 
-O `Dockerfile` gera um modelo de demonstração a partir do **fixture** durante o build e sobe só a API (`uvicorn`). Streamlit não entra na imagem padrão.
+- **`Dockerfile`**: API na porta 8000 (modelo demo a partir do fixture no build).
+- **`Dockerfile.streamlit`**: interface na porta 8501.
+- **`docker compose up --build`**: sobe API + Streamlit (veja `docker-compose.yml`).
+
+### Make (opcional)
+
+Com GNU Make (Git Bash / WSL): `make install`, `make train`, `make test`, `make openapi`, `make schema`.
+
+### Desenvolvimento
+
+```text
+pip install -r requirements-dev.txt
+pre-commit install
+```
 
 ## Layout
 
@@ -70,3 +113,6 @@ O `Dockerfile` gera um modelo de demonstração a partir do **fixture** durante 
 | `api/main.py` | FastAPI |
 | `schemas/confinement_dataset.schema.json` | Registro de amostras confinamento |
 | `notebooks/01_baseline_mnsol.ipynb` | Fluxo ETL + treino |
+| `notebooks/02_error_analysis.ipynb` | Esqueleto análise de erros |
+| `configs/`, `Makefile`, `docker-compose.yml` | Automação e deploy local |
+| `docs/REFERENCIAS.md`, `docs/DATA_POLICY.md` | Bibliografia e política de dados |

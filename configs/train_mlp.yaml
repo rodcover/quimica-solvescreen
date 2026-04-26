@@ -1,0 +1,21 @@
+# Configuração opcional para scripts/run_train.py (use --config configs/train_mlp.yaml)
+# Valores aqui são usados quando a flag CLI correspondente não for passada.
+
+seed: 42
+test_fold: 0
+
+# mlp | rf (RandomForest rápido para baseline de comparação)
+model_type: mlp
+
+ensemble:
+  enabled: false
+  n_members: 5
+
+mlp:
+  # Tamanhos de camada para datasets grandes (>=200 amostras no treino).
+  # Com menos amostras, train_baseline.py ainda ajusta automaticamente.
+  hidden_large: [512, 256, 128]
+
+rf:
+  n_estimators: 200
+  max_depth: 20

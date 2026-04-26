@@ -1,0 +1,33 @@
+{
+  "sample_id": "lit-demo-001",
+  "source_type": "literature_extraction",
+  "citation": "10.1039/xxxxxxxx (substituir por DOI real da extração)",
+  "inputs": {
+    "confinement_type": "cnt_pore",
+    "effective_width_nm": 1.2,
+    "surface_charge_density_cm2": null,
+    "oxygen_functional_group_density": null,
+    "ion": "Mg2+",
+    "ionic_strength_molar": 0.5,
+    "temperature_k": 300.0,
+    "water_model_or_ff": null,
+    "notes": "Exemplo de registro derivado de figura/tabela publicada (valores ilustrativos)."
+  },
+  "md_observables_optional": {
+    "rdf_ion_o_peak1_r_angstrom": null,
+    "rdf_ion_o_peak1_gmax": null,
+    "mean_coordination_number_shell1": null,
+    "water_orientation_order_parameter": null
+  },
+  "labels": {
+    "pmf_barrier_kcal_mol": 4.1,
+    "delta_g_insertion_kcal_mol": 2.3,
+    "delta_g_pore_minus_bulk_kcal_mol": null,
+    "permeation_rate_relative": null,
+    "selectivity_ratio": 2.5
+  },
+  "uncertainty": {
+    "pmf_barrier_kcal_mol_std": null,
+    "method": "estimated_from_figure"
+  }
+}

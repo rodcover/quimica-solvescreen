@@ -15,7 +15,7 @@
       "description": "simulation: own MD/ML-MD; literature_extraction: values from published figures/tables; hybrid: mixed."
     },
     "citation": {
-      "type": "string",
+      "type": ["string", "null"],
       "description": "DOI or primary reference when source_type is literature_extraction or hybrid."
     },
     "inputs": {
