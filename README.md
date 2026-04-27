@@ -1,11 +1,9 @@
 # SolvScreen (implementação do plano)
 
-[![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions/workflows/ci.yml)
+[![CI](https://github.com/rodcover/quimica-solvescreen/actions/workflows/ci.yml/badge.svg)](https://github.com/rodcover/quimica-solvescreen/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Tutorial fim a fim:** [docs/TUTORIAL.md](docs/TUTORIAL.md) · **Dados / licenças:** [data/README.md](data/README.md) · **Contribuir:** [CONTRIBUTING.md](CONTRIBUTING.md) · **Changelog:** [CHANGELOG.md](CHANGELOG.md) · **Citar software:** [CITATION.cff](CITATION.cff)
-
-Substitua `USER/REPO` no badge de CI pelo seu GitHub (`usuario/repositorio`).
+**Tutorial fim a fim:** [docs/TUTORIAL.md](docs/TUTORIAL.md) · **Dados / licenças:** [data/README.md](data/README.md) · **Contato:** [docs/CONTACT.md](docs/CONTACT.md) · **Contribuir:** [CONTRIBUTING.md](CONTRIBUTING.md) · **Changelog:** [CHANGELOG.md](CHANGELOG.md) · **Citar software:** [CITATION.cff](CITATION.cff)
 
 Pipeline para **energia livre de solvatação em meio bulk** (estilo MNSOL / [Delfos](https://doi.org/10.1039/C9SC02452B)) e **esboço de API** para confinamento (sem modelo treinado até haver labels de MD/literatura).
 

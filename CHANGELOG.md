@@ -22,7 +22,7 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
 ### Notas
 
-- Substituir `USER/REPO` no badge de CI do README pelo seu repositório GitHub.
+- Atualizar badges/URLs do repositório e metadados de citação conforme o remoto Git.
 
 ## [0.1.0] — 2026-04-26
 

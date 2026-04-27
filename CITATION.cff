@@ -3,10 +3,11 @@ title: SolvScreen
 message: "Se usar este software, cite usando os metadados abaixo."
 type: software
 authors:
-  - family-names: Contribuidores
-    name-particle: SolvScreen
-repository-code: "https://github.com/USER/REPO"
-url: "https://github.com/USER/REPO"
+  - family-names: De Santi
+    given-names: Rodolfo Cover
+    email: santi.rodolfo@gmail.com
+repository-code: "https://github.com/rodcover/quimica-solvescreen"
+url: "https://github.com/rodcover/quimica-solvescreen"
 license: MIT
 version: 0.2.0
 date-released: "2026-04-26"
